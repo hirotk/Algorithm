@@ -15,12 +15,10 @@ namespace AlgorithmTest {
         static VarSizeArray<int> target;
 
         [ClassInitialize]
-        public static void InitializeTarget(TestContext testContext) {
-        }
+        public static void InitializeTarget(TestContext testContext) {}
 
         [ClassCleanup]
-        public static void CleanupTarget() {
-        }
+        public static void CleanupTarget() {}
 
         [TestInitialize()]
         public void BeginTestMethod() {
@@ -31,8 +29,7 @@ namespace AlgorithmTest {
         }
 
         [TestCleanup()]
-        public void EndTestMethod() {
-        }
+        public void EndTestMethod() {}
 
         [TestMethod]
         public void AddLastTest() {
