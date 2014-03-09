@@ -5,23 +5,23 @@ using Algorithm;
 namespace AlgorithmTest {
     [TestClass]
     public class BinarySearchTest {
-        static int[] a = { 2, 3, 5, 7, 11, 13, 17, 19, 23};
+        static int[] a = { -2, 0, 2, 3, 5, 7, 11, 11, 13, 17, 19, 23};
 
         [TestMethod]
         public void IndexOfTest() {
             int expected = -1;
-            int actual = BinarySearch.IndexOf(a, -1);
+            int actual = BinarySearch.IndexOf(a, -3);
             Assert.AreEqual(expected, actual);
 
             expected = 0;
-            actual = BinarySearch.IndexOf(a, 2);
+            actual = BinarySearch.IndexOf(a, -2);
             Assert.AreEqual(expected, actual);
 
-            expected = 4;
+            expected = 6;
             actual = BinarySearch.IndexOf(a, 11);
             Assert.AreEqual(expected, actual);
 
-            expected = 8;
+            expected = 11;
             actual = BinarySearch.IndexOf(a, 23);
             Assert.AreEqual(expected, actual);
 
@@ -33,18 +33,18 @@ namespace AlgorithmTest {
         [TestMethod]
         public void IndexOfRecTest() {
             int expected = -1;
-            int actual = BinarySearch.IndexOf(a, -1);
+            int actual = BinarySearch.IndexOf(a, -3);
             Assert.AreEqual(expected, actual);
 
             expected = 0;
-            actual = BinarySearch.IndexOf(a, 2);
+            actual = BinarySearch.IndexOf(a, -2);
             Assert.AreEqual(expected, actual);
 
-            expected = 4;
+            expected = 6;
             actual = BinarySearch.IndexOf(a, 11);
             Assert.AreEqual(expected, actual);
 
-            expected = 8;
+            expected = 11;
             actual = BinarySearch.IndexOf(a, 23);
             Assert.AreEqual(expected, actual);
 
