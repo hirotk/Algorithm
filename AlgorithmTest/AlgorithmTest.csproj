@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySearchTest.cs" />
+    <Compile Include="SinglyLinkedListTest.cs" />
     <Compile Include="VarSizeArrayTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
