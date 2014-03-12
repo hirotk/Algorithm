@@ -38,6 +38,7 @@
     <Compile Include="BinarySearch.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SinglyLinkedList.cs" />
+    <Compile Include="Stack.cs" />
     <Compile Include="VerSizeArray.cs" />
   </ItemGroup>
   <ItemGroup>
