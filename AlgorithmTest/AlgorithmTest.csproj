@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySearchTest.cs" />
+    <Compile Include="QueueTest.cs" />
     <Compile Include="SinglyLinkedListTest.cs" />
     <Compile Include="StackTest.cs" />
     <Compile Include="VarSizeArrayTest.cs" />

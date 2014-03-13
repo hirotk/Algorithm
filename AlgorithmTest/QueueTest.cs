@@ -4,32 +4,32 @@ using Algorithm;
 
 namespace AlgorithmTest {
     [TestClass]
-    public class StackTest {
-        static Stack<int> target;
+    public class QueueTest {
+        static Queue<int> target;
 
         [TestInitialize()]
         public void BeginTestMethod() {
-            target = new Stack<int>();
+            target = new Queue<int>();
             Assert.AreEqual(target.Leng, 0);
-            target.Push(2);
-            target.Push(3);
-            target.Push(5);
-        }        
-        
+            target.Enqueue(2);
+            target.Enqueue(3);
+            target.Enqueue(5);
+        }
+
         [TestMethod]
-        public void PushTest() {
-            target.Push(7);
-            string expected = "[ 7 5 3 2 ]";
+        public void EnqueueTest() {
+            target.Enqueue(7);
+            string expected = "[ 2 3 5 7 ]";
             string actual = target.ToString();
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(target.Leng, 4);
         }
 
         [TestMethod]
-        public void PopTest() {
-            int ret = target.Pop();
-            Assert.AreEqual(ret, 5);
-            string expected = "[ 3 2 ]";
+        public void DequeueTest() {
+            int ret = target.Dequeue();
+            Assert.AreEqual(ret, 2);
+            string expected = "[ 3 5 ]";
             string actual = target.ToString();
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(target.Leng, 2);
@@ -38,8 +38,8 @@ namespace AlgorithmTest {
         [TestMethod]
         public void PeekTest() {
             int ret = target.Peek();
-            Assert.AreEqual(ret, 5);
-            string expected = "[ 5 3 2 ]";
+            Assert.AreEqual(ret, 2);
+            string expected = "[ 2 3 5 ]";
             string actual = target.ToString();
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(target.Leng, 3);
