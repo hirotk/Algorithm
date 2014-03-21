@@ -39,6 +39,7 @@
     <Compile Include="BinaryTree.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Queue.cs" />
+    <Compile Include="SimpleSort.cs" />
     <Compile Include="SinglyLinkedList.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="VerSizeArray.cs" />

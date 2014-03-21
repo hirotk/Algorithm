@@ -149,12 +149,14 @@ namespace Algorithm {
             return null;
         }
 
-        public void Remove(int key) {
+        public BinNode Remove(int key) {
             var node = Search(key);
 
             if (node != null) {
                 node = node.RemoveThis();
-            }            
+            }
+
+            return node;
         }
 
         private void depthFirst(BinNode node, Queue<BinNode> que, bool cleared = false) {

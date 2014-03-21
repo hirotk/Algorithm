@@ -3,15 +3,15 @@
 namespace Algorithm {
     public class Program {
         public static void Main(String[] args){
-            var tree = new BinaryTree();
-            tree.Add(3);
-            tree.Add(2);
-            tree.Add(7);
-            tree.Add(4);
-            tree.Add(6);
-            tree.Remove(3);
-            tree.Remove(6);
-            Console.WriteLine(tree);
+            int[] a = new int[10];
+            
+            var rand = new Random(0);
+            for (int i = 0; i < 10; i++) {
+                a[i] = rand.Next(-99, 99);
+            }
+
+            SimpleSort.BubbleSort(a);
+            Console.WriteLine(SimpleSort.AryToStr(a));
         }
     }
 }
