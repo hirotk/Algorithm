@@ -39,7 +39,16 @@ namespace AlgorithmTest {
 
             SimpleSort.SelectionSort(pa);
             string actual = SimpleSort.PAryToStr(pa);
-            string expected = "[ (-59, _) (-45, _) (-12, _) (8, _) (11, B) (11, A) (44, _) (53, _) (62, _) (94, _) ]";
+            string expected = "[ (-59, _) (-45, _) (-12, _) (8, _) (11, B) (11, A) (44, _) (53, _) (62, _) (94, _) ]"; // not stable
+//            string expected = "[ (-59, _) (-45, _) (-12, _) (8, _) (11, A) (11, B) (44, _) (53, _) (62, _) (94, _) ]"; // stable
+            Assert.AreEqual(actual, expected);
+        }
+
+        [TestMethod]
+        public void InsertionSortTest() {
+            SimpleSort.InsertionSort(a);
+            string actual = SimpleSort.AryToStr(a);
+            string expected = "[ -59 -45 -12 11 11 44 53 62 80 94 ]";
             Assert.AreEqual(actual, expected);
         }
     }
