@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="BinarySearchTest.cs" />
     <Compile Include="BinaryTreeTest.cs" />
+    <Compile Include="MergeSortTest.cs" />
     <Compile Include="QueueTest.cs" />
     <Compile Include="SimpleSortTest.cs" />
     <Compile Include="SinglyLinkedListTest.cs" />
