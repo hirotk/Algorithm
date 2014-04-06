@@ -9,14 +9,9 @@ namespace Algorithm {
                 a[i] = rand.Next(-99, 99);
             }
 
-            var list = new SinglyLinkedList<int>();
-            foreach (int n in a) {
-                list.Add(n);
-            }
-
-            Console.WriteLine(list.ToString());
-            MergeSort.Sort(list);
-            Console.WriteLine(list.ToString());
+            Console.WriteLine(SimpleSort.AryToStr(a));
+            QuickSort.Sort(a);
+            Console.WriteLine(SimpleSort.AryToStr(a));
         }
     }
 }
