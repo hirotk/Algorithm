@@ -7,7 +7,7 @@ namespace AlgorithmTest {
     public class StackTest {
         static Stack<int> target;
 
-        [TestInitialize()]
+        [TestInitialize]
         public void BeginTestMethod() {
             target = new Stack<int>();
             Assert.AreEqual(target.Leng, 0);

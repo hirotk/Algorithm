@@ -7,7 +7,7 @@ namespace AlgorithmTest {
     public class QueueTest {
         static Queue<int> target;
 
-        [TestInitialize()]
+        [TestInitialize]
         public void BeginTestMethod() {
             target = new Queue<int>();
             Assert.AreEqual(target.Leng, 0);

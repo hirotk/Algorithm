@@ -20,7 +20,7 @@ namespace AlgorithmTest {
         [ClassCleanup]
         public static void CleanupTarget() {}
 
-        [TestInitialize()]
+        [TestInitialize]
         public void BeginTestMethod() {
             target = new VarSizeArray<int>();
             target[0] = 2;
@@ -28,7 +28,7 @@ namespace AlgorithmTest {
             target[2] = 5;
         }
 
-        [TestCleanup()]
+        [TestCleanup]
         public void EndTestMethod() {}
 
         [TestMethod]

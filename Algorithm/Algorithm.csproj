@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="BinarySearch.cs" />
     <Compile Include="BinaryTree.cs" />
+    <Compile Include="HeapSort.cs" />
     <Compile Include="MergeSort.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Queue.cs" />

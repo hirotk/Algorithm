@@ -7,7 +7,7 @@ namespace AlgorithmTest {
     public class SimpleSortTest {
         private int[] a;
 
-        [TestInitialize()]
+        [TestInitialize]
         public void BeginTestMethod() {
             a = new int[10];
             var rand = new Random(0);

@@ -15,7 +15,7 @@ namespace AlgorithmTest {
         [ClassCleanup]
         public static void CleanupTarget() { }
 
-        [TestInitialize()]
+        [TestInitialize]
         public void BeginTestMethod() {
             target = new SinglyLinkedList<int>();
             Assert.AreEqual(target.Leng, 0);
@@ -24,7 +24,7 @@ namespace AlgorithmTest {
             target.AddLast(5);
         }
 
-        [TestCleanup()]
+        [TestCleanup]
         public void EndTestMethod() { }
 
         [TestMethod]

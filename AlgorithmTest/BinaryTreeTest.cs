@@ -7,7 +7,7 @@ namespace AlgorithmTest {
     public class BinaryTreeTest {
         static BinaryTree target;
 
-        [TestInitialize()]
+        [TestInitialize]
         public void BeginTestMethod() {
             target = new BinaryTree();
             target.Add(3);
