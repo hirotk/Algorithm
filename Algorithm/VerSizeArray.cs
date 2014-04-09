@@ -46,12 +46,7 @@ namespace Algorithm {
 
         void reAlloc() {
             var newAry = new T[ary.Length * 2];
-
-            // copy the current array to a new array
-            int i = 0;
-            foreach(T v in ary)
-                newAry[i++] = v;
-            
+            Array.Copy(ary, newAry, ary.Length);            
             ary = newAry;
             Capacity = ary.Length;
         }
