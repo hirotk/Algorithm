@@ -5,21 +5,21 @@ using Algorithm;
 namespace AlgorithmTest {
     [TestClass]
     public class BinaryTreeTest {
-        static BinaryTree target;
+        static BinaryTree<String> target;
 
         [TestInitialize]
         public void BeginTestMethod() {
-            target = new BinaryTree();
-            target.Add(3);
-            target.Add(2);
-            target.Add(7);
+            target = new BinaryTree<String>();
+            target.Add(3, "three");
+            target.Add(2, "two");
+            target.Add(7, "seven");
         }
 
         [TestMethod]
         public void AddTest() {
-            target.Add(5);
+            target.Add(5, "five");
             string expected = "[ 2 3 5 7 ]";
-            string actual = target.ToString();
+            string actual = target.KeysToString();
             Assert.AreEqual(expected, actual);
         }
 
@@ -33,11 +33,18 @@ namespace AlgorithmTest {
         public void RemoveTest() {
             target.Remove(2);
             string expected = "[ 3 7 ]";
-            string actual = target.ToString();
+            string actual = target.KeysToString();
             Assert.AreEqual(expected, actual);
             target.Remove(7);
             target.Remove(3);
-            Assert.AreEqual(target.ToString(), "[ ]");
+            Assert.AreEqual(target.KeysToString(), "[ ]");
+        }
+
+        [TestMethod]
+        public void ToStringTest() {
+            string expected = "[ two three seven ]";
+            string actual = target.ToString();
+            Assert.AreEqual(expected, actual);
         }
     }
 }

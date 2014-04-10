@@ -11,179 +11,189 @@ namespace Algorithm {
         None, Left, Right, Both
     }
 
-    public class BinNode {
-        public int Key { get; set; }
-        //public T Val { get; set; }
-        public BinNode Left { get; set; }
-        public BinNode Right { get; set; }
-        public BinNode Parent { get; set; }
+    public class BinNode<T> {
+        public int Key { get; private set; }
+        public T Val { get; private set; }
+        public BinNode<T> Left { get; private set; }
+        public BinNode<T> Right { get; private set; }
+        public BinNode<T> Parent { get; private set; }
         public NodeType NodeTyp { get; set; }
 
-        public BinNode(int key) {
-            this.Key = key;
-            this.Left = null;
-            this.Right = null;
-            this.Parent = null;
-            this.ChildTyp = ChildType.None;
+        public BinNode(int key, T val) {
+            Key = key; Val = val;
+            Left = Right = Parent = null;
+            ChildTyp = ChildType.None;
         }
 
         private ChildType childTyp;
         public ChildType ChildTyp {
             get {
-                if ((this.Left == null) && (this.Right == null)) {
+                if (Left == null && Right == null)
                     return ChildType.None;
-                } else if (this.Left == null) {
+                else if (Left == null)
                     return ChildType.Right;
-                } else if (this.Right == null) {
+                else if (Right == null)
                     return ChildType.Left;
-                } else {
-                    return ChildType.Both;
-                }
+                else 
+                    return ChildType.Both;                
             }
-            set { childTyp = value;}
+            private set { childTyp = value;}
         }
 
-        public void AddLeftChild(BinNode node){
-            this.Left = node;
+        public void AddLeftChild(BinNode<T> node){
+            Left = node;
             if (node == null) return;
             Debug.Assert(node.Key <= this.Key);
             node.Parent = this;
             node.NodeTyp = NodeType.LeftChild;
         }
 
-        public void AddRightChild(BinNode node) {
+        public void AddRightChild(BinNode<T> node) {
             this.Right = node;
-            if (node == null) { return; }
+            if (node == null) return;
             Debug.Assert(this.Key < node.Key);
             node.Parent = this;
             node.NodeTyp = NodeType.RightChild;
         }
 
-        private BinNode removeMinNode(BinNode node) {
+        private BinNode<T> removeMinNode(BinNode<T> node) {
             Debug.Assert(node != null);
-            while (node.Left != null) {
+            while (node.Left != null)
                 node = node.Left;
-            }
-
+            
             Debug.Assert(node.NodeTyp == NodeType.LeftChild);
             node.Parent.AddLeftChild(node.Right);
 
             return node; // removed node
         }
 
-        public BinNode RemoveThis() {
-            BinNode node = null;
+        public BinNode<T> RemoveThis() {
+            BinNode<T> node = null;
 
             switch (ChildTyp) {
                 case ChildType.None:
                     break;
                 case ChildType.Left:  // Only
-                    node = this.Left;
+                    node = Left;
                     break;
                 case ChildType.Right: // Only
-                    node = this.Right;
+                    node = Right;
                     break;
                 case ChildType.Both:
-                    node = removeMinNode(this.Right);
-                    node.AddLeftChild(this.Left);
-                    node.AddRightChild(this.Right);
+                    node = removeMinNode(Right);
+                    node.AddLeftChild(Left);
+                    node.AddRightChild(Right);
                     break;
             }
 
-            if (this.NodeTyp == NodeType.LeftChild) {
-                this.Parent.AddLeftChild(node);
-            } else if (this.NodeTyp == NodeType.RightChild) {
-                this.Parent.AddRightChild(node);
-            }
-
+            if (NodeTyp == NodeType.LeftChild)
+                Parent.AddLeftChild(node);
+            else if (NodeTyp == NodeType.RightChild)
+                Parent.AddRightChild(node);
+           
             return node;
         }
     }
-    
-    public class BinaryTree {
-        private BinNode sentinel = new BinNode(int.MaxValue);
-        private BinNode Root { get { return sentinel.Left; } }
+
+    public class BinaryTree<T> {
+        private BinNode<T> sentinel = new BinNode<T>(int.MaxValue, default(T));
+        private BinNode<T> Root { get { return sentinel.Left; } }
 
         public BinaryTree() {
             sentinel.NodeTyp = NodeType.Sent;
         }
 
-        public void Add(int key) {
-            if (Root == null) {                
-                sentinel.AddLeftChild(new BinNode(key));
+        public void Add(int key, T val) {
+            var newNode = new BinNode<T>(key, val);
+            if (Root == null) {
+                sentinel.AddLeftChild(newNode);
                 return;
             }
 
-            var node = this.Root;
+            var node = Root;
             while (true) {
                 if (key <= node.Key) {
                     if (node.Left != null) {
                         node = node.Left; // move to the left node
                     } else {
-                        node.AddLeftChild(new BinNode(key));
+                        node.AddLeftChild(newNode);
                         return;
                     }
                 } else {
                     if (node.Right != null) {
                         node = node.Right; // move to the right node
                     } else {
-                        node.AddRightChild(new BinNode(key));
+                        node.AddRightChild(newNode);
                         return;
                     }
                 }
             }
         }
 
-        public BinNode Search(int key) {
-            var node = this.Root;
+        public BinNode<T> Search(int key) {
+            var node = Root;
 
             while (node != null) {
-                if (key == node.Key) {
+                if (key == node.Key)
                     return node;
-                } else if (key < node.Key) {
+                else if (key < node.Key)
                     node = node.Left;
-                } else {
+                else
                     node = node.Right;
-                }
             }
             return null;
         }
 
-        public BinNode Remove(int key) {
+        public BinNode<T> Remove(int key) {
             var node = Search(key);
 
-            if (node != null) {
+            if (node != null)
                 node = node.RemoveThis();
-            }
 
             return node;
         }
 
-        private void depthFirst(BinNode node, Queue<BinNode> que, bool cleared = false) {
-            if (node == null) { return; }
+        private void depthFirst(BinNode<T> node, Queue<BinNode<T>> que, bool cleared = false) {
+            if (node == null) return;
             if (cleared == false) {
-                que = new Queue<BinNode>();
+                que = new Queue<BinNode<T>>();
                 cleared = true;
             }
 
-            depthFirst(node.Left, que, true);
+            depthFirst(node.Left, que, cleared);
             que.Enqueue(node);
-            depthFirst(node.Right, que, true);
+            depthFirst(node.Right, que, cleared);
         }
 
-        public override string ToString() {
-            var que = new Queue<BinNode>();
-            depthFirst(this.Root, que, true);
+        private string getKeyValString(bool isKey = false) {
+            var que = new Queue<BinNode<T>>();
+            depthFirst(Root, que, true);
 
             var result = new StringBuilder("[ ");
             while (que.Leng > 0) {
                 var node = que.Dequeue();
-                result.Append(node.Key);
+                if (isKey)
+                    result.Append(node.Key);
+                else
+                    result.Append(node.Val);
+
                 result.Append(" ");
             }
             result.Append("]");
 
             return result.ToString();
+        }
+
+        public string KeysToString() {
+            return getKeyValString(isKey:true);
+        }
+
+        public string ValsToString() {
+            return getKeyValString(isKey:false);
+        }
+
+        public override string ToString() {
+            return ValsToString();
         }
     }
 }
