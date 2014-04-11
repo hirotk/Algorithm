@@ -27,7 +27,7 @@ namespace AlgorithmTest {
         [TestMethod]
         public void SelectionSortTest() {
             int[] k = { 44, 62, 53, 11, 11, -59, 8, -12, 94, -45 };
-            Pair[] pa = new Pair[10];
+            var pa = new Pair<char>[10];
 
             for (int i = 0; i < 10; i++) {
                 pa[i].key = k[i];
@@ -38,7 +38,7 @@ namespace AlgorithmTest {
             pa[4].val = 'B';
 
             SimpleSort.SelectionSort(pa);
-            string actual = SimpleSort.PAryToStr(pa);
+            string actual = SimpleSort.PAryToStr<char>(pa);
             string expected = "[ (-59, _) (-45, _) (-12, _) (8, _) (11, B) (11, A) (44, _) (53, _) (62, _) (94, _) ]"; // not stable
 //            string expected = "[ (-59, _) (-45, _) (-12, _) (8, _) (11, A) (11, B) (44, _) (53, _) (62, _) (94, _) ]"; // stable
             Assert.AreEqual(actual, expected);
