@@ -22,10 +22,11 @@ namespace Algorithm {
         }
 
         private SinglyLinkedListNode<T> getPrevNode(int idx) {
-            if (idx < 0 || Leng < idx) throw new ArgumentOutOfRangeException("idx");
+            if (idx < 0 || Leng < idx) { throw new ArgumentOutOfRangeException("idx"); }
             var iNode = head;
-            for (int i = 0; i < idx; ++i)
+            for (int i = 0; i < idx; i++) {
                 iNode = iNode.Next;
+            }
 
             return iNode;
         }
@@ -40,7 +41,7 @@ namespace Algorithm {
                 iNode.Next = node;
 
                 // Update LastNode
-                if (idx == Leng) lastNode = node;
+                if (idx == Leng) { lastNode = node; }
                 Leng++;
             } catch (Exception) {
                 throw;
@@ -53,7 +54,7 @@ namespace Algorithm {
 
         public T Remove(int idx = 0) {
             try {
-                if (Leng < 1) throw new Exception("The SinglyLinkedList is empty.");
+                if (Leng < 1) { throw new Exception("The SinglyLinkedList is empty."); }
                 var iNode = getPrevNode(idx);
 
                 // Remove node
@@ -61,7 +62,7 @@ namespace Algorithm {
                 iNode.Next = node.Next;
                 
                 // Update LastNode
-                if (idx == Leng - 1) lastNode = iNode;
+                if (idx == Leng - 1) { lastNode = iNode; }
                 Leng--;
                 return node.val;
             } catch (Exception) {
@@ -71,7 +72,7 @@ namespace Algorithm {
 
         public T Peek(int idx = 0) {
             try {
-                if (Leng < 1) throw new Exception("The SinglyLinkedList is empty.");
+                if (Leng < 1) { throw new Exception("The SinglyLinkedList is empty."); }
                 var iNode = getPrevNode(idx + 1);
                 return iNode.val;
             } catch (Exception) {
@@ -82,11 +83,10 @@ namespace Algorithm {
         public override string ToString() {
             var sb = new StringBuilder("[ ");
             var node = head;
-            for (int i = 0; i < Leng; ++i) {
+            for (int i = 0; i < Leng; i++) {
                 node = node.Next;
                 sb.AppendFormat("{0} ", node.val);
             }
-
             sb.Append("]");
             return sb.ToString();
         }

@@ -10,7 +10,7 @@ namespace Algorithm {
         /// </summary>
         /// <param name="leng">initial array length</param>
         public VarSizeArray(int leng = INIT_LENG) {
-            if (leng <= 0) throw new ArgumentException("The leng is out of range.");
+            if (leng <= 0) { throw new ArgumentException("The leng is out of range."); }
             ary = new T[leng];
             Count = Capacity = leng;
         }
@@ -21,25 +21,25 @@ namespace Algorithm {
 
         public T this[int i] {
             set {
-                if (i < 0 || Count <= i) throw new ArgumentOutOfRangeException("i");                
+                if (i < 0 || Count <= i) { throw new ArgumentOutOfRangeException("i"); }
                 ary[i] = value;
             }
             get {
-                if (i < 0 || Count <= i) throw new ArgumentOutOfRangeException("i");                
+                if (i < 0 || Count <= i) { throw new ArgumentOutOfRangeException("i"); }
                 return ary[i];
             }
         }
 
         public void AddLast(T v) {
-            if (Capacity <= Count) reAlloc();
+            if (Capacity <= Count) { reAlloc(); }
             ary[Count++] = v;
         }
 
         public override string ToString() {
             var sb = new StringBuilder("[ ");
-            foreach (T v in ary)
+            foreach (T v in ary) {
                 sb.AppendFormat("{0} ", v);
-
+            }
             sb.Append("]");
             return sb.ToString();
         }

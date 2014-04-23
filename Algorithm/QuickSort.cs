@@ -9,7 +9,7 @@ namespace Algorithm {
         }
 
         private static void quickSort(int[] a, int minIdx, int maxIdx) {
-            if (minIdx >= maxIdx) return;
+            if (minIdx >= maxIdx) { return; }
             int pivot = partition(a, minIdx, maxIdx);
             quickSort(a, minIdx, pivot - 1);
             quickSort(a, pivot + 1, maxIdx);                      
@@ -20,9 +20,9 @@ namespace Algorithm {
             int i = minIdx, j = maxIdx - 1;
 
             while (true) {
-                while (a[i] < pivot) i++;
-                while (i < j && pivot < a[j]) j--;
-                if (i >= j) break;
+                while (a[i] < pivot) { i++; }
+                while (i < j && pivot < a[j]) { j--; }
+                if (i >= j) { break; }
                 int t = a[j];
                 a[j] = a[i]; // not stable sort 
                 a[i] = t;

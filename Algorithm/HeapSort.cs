@@ -4,11 +4,13 @@ namespace Algorithm {
     public class HeapSort {
         public static void Sort(int[] a) {
             var hp = new Heap(a.Length);
-            foreach (int n in a) 
+            foreach (int n in a) {
                 hp.Add(n);
-            
-            for (int i = 0; i < a.Length; ++i) 
+            }
+
+            for (int i = 0; i < a.Length; i++) {
                 a[i] = hp.Remove();
+            }
         }
     }
 
@@ -29,7 +31,7 @@ namespace Algorithm {
         }
 
         public void Add(int val) {
-            if (a.Length <= count) throw new Exception("Heap is full.");
+            if (a.Length <= count) { throw new Exception("Heap is full."); }
             
             a[count] = val;
             ascend(count, 0);
@@ -40,7 +42,7 @@ namespace Algorithm {
             int i = startIdx;
 
             while (endIdx < i) {
-                if (a[(i - 1) / 2] <= a[i]) break;
+                if (a[(i - 1) / 2] <= a[i]) { break; }
 
                 int t = a[(i - 1) / 2];
                 a[(i - 1) / 2] = a[i];
@@ -51,7 +53,7 @@ namespace Algorithm {
         }
 
         public int Remove() {
-            if (count <= 0) throw new Exception("Heap is empty.");
+            if (count <= 0) { throw new Exception("Heap is empty."); }
             
             var min = a[0];
             a[0] = a[count - 1];
@@ -68,7 +70,7 @@ namespace Algorithm {
             while (i < endIdx) {
                 int lChild = 2 * i + 1 < endIdx ? a[2 * i + 1] : int.MaxValue;
                 int rChild = 2 * i + 2 < endIdx ? a[2 * i + 2] : int.MaxValue;
-                if (a[i] <= lChild && a[i] <= rChild) break;
+                if (a[i] <= lChild && a[i] <= rChild) { break; }
 
                 if (lChild < rChild) {
                     a[2 * i + 1] = a[i];
@@ -84,15 +86,16 @@ namespace Algorithm {
 
         private void rebuild() {
             int lastParentIdx = count / 2;
-            for (int i = lastParentIdx; i >= 0; --i) 
+            for (int i = lastParentIdx; i >= 0; i++) {
                 descend(i, count);
+            }
         }
 
         public override string ToString() {
             var sb = new System.Text.StringBuilder("[ ");
-            foreach (int n in a) 
+            foreach (int n in a) {
                 sb.AppendFormat("{0} ", n);
-            
+            }            
             sb.Append("]");
             return sb.ToString();
         }

@@ -24,8 +24,9 @@ namespace Algorithm {
                     }
                 }
 #if DEBUG
-                for (int j = sortedIdx + 1; j <= LAST_IDX; j++)
-                    Debug.Assert(a[sortedIdx] <= a[j]);                
+                for (int j = sortedIdx + 1; j <= LAST_IDX; j++) {
+                    Debug.Assert(a[sortedIdx] <= a[j]);
+                }
 #endif
             }
         }
@@ -34,8 +35,9 @@ namespace Algorithm {
             int LAST_IDX = a.Length - 1;
             for (int sortedIdx = 0; sortedIdx < LAST_IDX; sortedIdx++) {
                 int minIdx = sortedIdx;
-                for (int i = sortedIdx + 1; i <= LAST_IDX; i++) // O(n^2)
-                    if (a[minIdx].CompareTo(a[i]) > 0) minIdx = i;
+                for (int i = sortedIdx + 1; i <= LAST_IDX; i++) { // O(n^2)
+                    if (a[minIdx].CompareTo(a[i]) > 0) { minIdx = i; }
+                }
                 
 #if STABLE
                 for (int j = minIdx; j > sortedIdx; j--) {
@@ -64,26 +66,27 @@ namespace Algorithm {
                     }
                 }
 #if DEBUG
-                for (int j = sortedIdx; j > 0; j--)
-                    Debug.Assert(a[0] <= a[j]);                
+                for (int j = sortedIdx; j > 0; j--) {
+                    Debug.Assert(a[0] <= a[j]);
+                }
 #endif
             }
         }
 
         public static string AryToStr(int[] a) {
             var sb = new StringBuilder("[ ");
-            foreach (int i in a)
-                sb.AppendFormat("{0} ", i);            
-
+            foreach (int i in a) {
+                sb.AppendFormat("{0} ", i);
+            }
             sb.Append("]");
             return sb.ToString();
         }
 
         public static string PAryToStr<T>(Pair<T>[] a) {
             var sb = new StringBuilder("[ ");
-            foreach (Pair<T> i in a)
+            foreach (Pair<T> i in a) {
                 sb.AppendFormat("({0}, {1}) ", i.key, i.val);
-            
+            }            
             sb.Append("]");
             return sb.ToString();
         }

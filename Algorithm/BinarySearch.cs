@@ -13,12 +13,13 @@ namespace Algorithm {
 
             while (li <= hi) {
                 int mi = li + (hi - li) / 2;
-                if (a[mi] == v)
+                if (a[mi] == v) {
                     return mi;
-                else if (a[mi] < v)
+                } else if (a[mi] < v) {
                     li = mi + 1;
-                else
+                } else {
                     hi = mi - 1;
+                }
             }
 
             return -1;
@@ -29,14 +30,15 @@ namespace Algorithm {
         }
 
         private static int half(int[] a, int li, int hi, int v){
-            if (li > hi) return -1;
+            if (li > hi) { return -1; }
             int mi = li + (hi - li) / 2;
-            if (a[mi] == v) return mi;
+            if (a[mi] == v) { return mi; }
 
-            if (a[mi] < v)
-                return half(a, mi+1, hi, v);
-            else
-                return half(a, li, mi-1, v);
+            if (a[mi] < v) {
+                return half(a, mi + 1, hi, v);
+            } else {
+                return half(a, li, mi - 1, v);
+            }
         }
     }
 }

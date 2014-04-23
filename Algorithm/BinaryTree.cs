@@ -28,21 +28,22 @@ namespace Algorithm {
         private ChildType childTyp;
         public ChildType ChildTyp {
             get {
-                if (Left == null && Right == null)
+                if (Left == null && Right == null) {
                     return ChildType.None;
-                else if (Left == null)
+                } else if (Left == null) {
                     return ChildType.Right;
-                else if (Right == null)
+                } else if (Right == null) {
                     return ChildType.Left;
-                else 
-                    return ChildType.Both;                
+                } else {
+                    return ChildType.Both;
+                }
             }
             private set { childTyp = value;}
         }
 
         public void AddLeftChild(BinNode<T> node){
             Left = node;
-            if (node == null) return;
+            if (node == null) { return; }
             Debug.Assert(node.Key <= this.Key);
             node.Parent = this;
             node.NodeTyp = NodeType.LeftChild;
@@ -50,7 +51,7 @@ namespace Algorithm {
 
         public void AddRightChild(BinNode<T> node) {
             this.Right = node;
-            if (node == null) return;
+            if (node == null) { return; }
             Debug.Assert(this.Key < node.Key);
             node.Parent = this;
             node.NodeTyp = NodeType.RightChild;
@@ -86,10 +87,11 @@ namespace Algorithm {
                     break;
             }
 
-            if (NodeTyp == NodeType.LeftChild)
+            if (NodeTyp == NodeType.LeftChild) {
                 Parent.AddLeftChild(node);
-            else if (NodeTyp == NodeType.RightChild)
+            } else if (NodeTyp == NodeType.RightChild) {
                 Parent.AddRightChild(node);
+            }
            
             return node;
         }
@@ -134,12 +136,13 @@ namespace Algorithm {
             var node = Root;
 
             while (node != null) {
-                if (key == node.Key)
+                if (key == node.Key) {
                     return node;
-                else if (key < node.Key)
+                } else if (key < node.Key) {
                     node = node.Left;
-                else
+                } else {
                     node = node.Right;
+                }
             }
             return null;
         }
@@ -147,14 +150,15 @@ namespace Algorithm {
         public BinNode<T> Remove(int key) {
             var node = Search(key);
 
-            if (node != null)
+            if (node != null) {
                 node = node.RemoveThis();
+            }
 
             return node;
         }
 
         private void depthFirst(BinNode<T> node, Queue<BinNode<T>> que, bool cleared = false) {
-            if (node == null) return;
+            if (node == null) { return; }
             if (cleared == false) {
                 que = new Queue<BinNode<T>>();
                 cleared = true;
@@ -172,10 +176,11 @@ namespace Algorithm {
             var result = new StringBuilder("[ ");
             while (que.Leng > 0) {
                 var node = que.Dequeue();
-                if (isKey)
+                if (isKey) {
                     result.Append(node.Key);
-                else
+                } else {
                     result.Append(node.Val);
+                }
 
                 result.Append(" ");
             }

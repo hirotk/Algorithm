@@ -10,7 +10,7 @@ namespace Algorithm {
         }
 
         private static void split(int[] a, int minIdx, int maxIdx) {
-            if (maxIdx - minIdx <= 0) return; 
+            if (maxIdx - minIdx <= 0) { return; }
 
             int midIdx = minIdx + (maxIdx - minIdx) / 2;
 
@@ -24,29 +24,30 @@ namespace Algorithm {
             int LENG = maxIdx - minIdx + 1;
             var b = new int[LENG];
             int i = minIdx, j = midIdx + 1, k = 0;
-            
-            while (i <= midIdx && j <= maxIdx)
+
+            while (i <= midIdx && j <= maxIdx) {
                 b[k++] = (a[i] <= a[j]) ? a[i++] : a[j++]; // stable sort
-            
-            while (i <= midIdx) b[k++] = a[i++];            
-            while (j <= maxIdx) b[k++] = a[j++];            
+            }
+            while (i <= midIdx) { b[k++] = a[i++]; }
+            while (j <= maxIdx) { b[k++] = a[j++]; }
 
             Array.Copy(b, 0, a, minIdx, LENG);
         }
 
         public static void Sort(NList list) {
             var list1 = split(list);
-            while (0 < list.Leng) list.Remove();
-            while (0 < list1.Leng) list.AddLast(list1.Remove());
+            while (0 < list.Leng) { list.Remove(); }
+            while (0 < list1.Leng) { list.AddLast(list1.Remove()); }
         }
 
         private static NList split(NList list) {
-            if (list.Leng <= 1) return list;
+            if (list.Leng <= 1) { return list; }
             int HALF_LENG = list.Leng / 2;
             var list1 = (NList)Activator.CreateInstance(list.GetType());
 
-            while (HALF_LENG < list.Leng)
+            while (HALF_LENG < list.Leng) {
                 list1.Add(list.Remove());
+            }
             
             return merge(split(list), split(list1));    
         }
@@ -55,14 +56,15 @@ namespace Algorithm {
             var mrgList = (NList)Activator.CreateInstance(list1.GetType());
 
             while (0 < list1.Leng &&  0 < list2.Leng) {
-                if (list1.Peek(0) <= list2.Peek(0))
+                if (list1.Peek(0) <= list2.Peek(0)) {
                     mrgList.AddLast(list1.Remove());
-                else
-                    mrgList.AddLast(list2.Remove());                
+                } else {
+                    mrgList.AddLast(list2.Remove());
+                }
             }
 
-            while (0 < list1.Leng) mrgList.AddLast(list1.Remove());            
-            while (0 < list2.Leng) mrgList.AddLast(list2.Remove());            
+            while (0 < list1.Leng) { mrgList.AddLast(list1.Remove()); }
+            while (0 < list2.Leng) { mrgList.AddLast(list2.Remove()); }
 
             return mrgList;
         }
