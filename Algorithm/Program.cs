@@ -10,7 +10,7 @@ namespace Algorithm {
             }
 
             Console.WriteLine(SimpleSort.AryToStr(a));
-            HeapSort.Sort(a);
+            QuickSort.Sort(a);
             Console.WriteLine(SimpleSort.AryToStr(a));
         }
     }

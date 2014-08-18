@@ -28,9 +28,8 @@ namespace Algorithm {
                 a[i] = t;
             }
 
-            int tm = a[maxIdx];
             a[maxIdx] = a[i];
-            a[i] = tm;
+            a[i] = pivot;
 
             return i;            
         }
