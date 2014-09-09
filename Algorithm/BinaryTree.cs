@@ -157,21 +157,17 @@ namespace Algorithm {
             return node;
         }
 
-        private void depthFirst(BinNode<T> node, Queue<BinNode<T>> que, bool cleared = false) {
+        private void depthFirst(BinNode<T> node, Queue<BinNode<T>> que) {
             if (node == null) { return; }
-            if (cleared == false) {
-                que = new Queue<BinNode<T>>();
-                cleared = true;
-            }
 
-            depthFirst(node.Left, que, cleared);
+            depthFirst(node.Left, que);
             que.Enqueue(node);
-            depthFirst(node.Right, que, cleared);
+            depthFirst(node.Right, que);
         }
 
         private string getKeyValString(bool isKey = false) {
             var que = new Queue<BinNode<T>>();
-            depthFirst(Root, que, true);
+            depthFirst(Root, que);
 
             var result = new StringBuilder("[ ");
             while (que.Leng > 0) {
