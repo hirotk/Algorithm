@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Diagnostics;
 
 namespace Algorithm {
@@ -51,7 +50,7 @@ namespace Algorithm {
 
         public void AddRightChild(BinNode<T> node) {
             this.Right = node;
-            if (node == null) { return; }
+            if (node == null) return;
             Debug.Assert(this.Key < node.Key);
             node.Parent = this;
             node.NodeTyp = NodeType.RightChild;
@@ -59,9 +58,10 @@ namespace Algorithm {
 
         private BinNode<T> removeMinNode(BinNode<T> node) {
             Debug.Assert(node != null);
-            while (node.Left != null)
+            while (node.Left != null) {
                 node = node.Left;
-            
+            }
+
             Debug.Assert(node.NodeTyp == NodeType.LeftChild);
             node.Parent.AddLeftChild(node.Right);
 
@@ -158,7 +158,7 @@ namespace Algorithm {
         }
 
         private void depthFirst(BinNode<T> node, Queue<BinNode<T>> que) {
-            if (node == null) { return; }
+            if (node == null) return;
 
             depthFirst(node.Left, que);
             que.Enqueue(node);

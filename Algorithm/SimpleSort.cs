@@ -1,5 +1,4 @@
 ﻿//#define STABLE 
-using System;
 using System.Text;
 using System.Diagnostics;
  
@@ -14,9 +13,9 @@ namespace Algorithm {
 
     public class SimpleSort {
         public static void BubbleSort(int[] a) {
-            int LAST_IDX = a.Length - 1;
-            for (int sortedIdx = 0; sortedIdx < LAST_IDX; sortedIdx++) {
-                for (int i = LAST_IDX; i > sortedIdx; i--) { // O(n^2)
+            int lastIdx = a.Length - 1;
+            for (int sortedIdx = 0; sortedIdx < lastIdx; sortedIdx++) {
+                for (int i = lastIdx; i > sortedIdx; i--) { // O(n^2)
                     if (a[i - 1] > a[i]) { // stable sort
                         int t = a[i - 1];
                         a[i - 1] = a[i];
@@ -24,7 +23,7 @@ namespace Algorithm {
                     }
                 }
 #if DEBUG
-                for (int j = sortedIdx + 1; j <= LAST_IDX; j++) {
+                for (int j = sortedIdx + 1; j <= lastIdx; j++) {
                     Debug.Assert(a[sortedIdx] <= a[j]);
                 }
 #endif
@@ -32,10 +31,10 @@ namespace Algorithm {
         }
 
         public static void SelectionSort(Pair<char>[] a) {
-            int LAST_IDX = a.Length - 1;
-            for (int sortedIdx = 0; sortedIdx < LAST_IDX; sortedIdx++) {
+            int lastIdx = a.Length - 1;
+            for (int sortedIdx = 0; sortedIdx < lastIdx; sortedIdx++) {
                 int minIdx = sortedIdx;
-                for (int i = sortedIdx + 1; i <= LAST_IDX; i++) { // O(n^2)
+                for (int i = sortedIdx + 1; i <= lastIdx; i++) { // O(n^2)
                     if (a[minIdx].CompareTo(a[i]) > 0) { minIdx = i; }
                 }
                 
@@ -56,8 +55,8 @@ namespace Algorithm {
         }
 
         public static void InsertionSort(int[] a) {
-            int LAST_IDX = a.Length - 1;
-            for (int sortedIdx = 1; sortedIdx <= LAST_IDX; sortedIdx++) {
+            int lastIdx = a.Length - 1;
+            for (int sortedIdx = 1; sortedIdx <= lastIdx; sortedIdx++) {
                 for (int i = sortedIdx; i > 0; i--) { // O(n^2)
                     if (a[i - 1] > a[i]) { // stable sort
                         int t = a[i - 1];
@@ -82,7 +81,7 @@ namespace Algorithm {
             return sb.ToString();
         }
 
-        public static string PAryToStr<T>(Pair<T>[] a) {
+        public static string PairAryToStr<T>(Pair<T>[] a) {
             var sb = new StringBuilder("[ ");
             foreach (Pair<T> i in a) {
                 sb.AppendFormat("({0}, {1}) ", i.key, i.val);

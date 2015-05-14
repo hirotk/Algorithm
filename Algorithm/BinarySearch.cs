@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithm {
+﻿namespace Algorithm {
     public class BinarySearch {
         /// <summary>
         /// Search a value in an array
@@ -30,9 +28,9 @@ namespace Algorithm {
         }
 
         private static int half(int[] a, int li, int hi, int v){
-            if (li > hi) { return -1; }
+            if (li > hi) return -1;
             int mi = li + (hi - li) / 2;
-            if (a[mi] == v) { return mi; }
+            if (a[mi] == v) return mi;
 
             if (a[mi] < v) {
                 return half(a, mi + 1, hi, v);

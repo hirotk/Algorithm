@@ -5,12 +5,12 @@ using NList = Algorithm.SinglyLinkedList<int>;
 namespace Algorithm {
     public class MergeSort {
         public static void Sort(int[] a) {
-            int LAST_IDX = a.Length - 1;
-            split(a, 0, LAST_IDX);
+            int lastIdx = a.Length - 1;
+            split(a, 0, lastIdx);
         }
 
         private static void split(int[] a, int minIdx, int maxIdx) {
-            if (maxIdx - minIdx <= 0) { return; }
+            if (maxIdx <= minIdx) return;
 
             int midIdx = minIdx + (maxIdx - minIdx) / 2;
 
@@ -41,11 +41,12 @@ namespace Algorithm {
         }
 
         private static NList split(NList list) {
-            if (list.Leng <= 1) { return list; }
-            int HALF_LENG = list.Leng / 2;
+            if (list.Leng <= 1) return list;
+
+            int halfLeng = list.Leng / 2;
             var list1 = (NList)Activator.CreateInstance(list.GetType());
 
-            while (HALF_LENG < list.Leng) {
+            while (halfLeng < list.Leng) {
                 list1.Add(list.Remove());
             }
             

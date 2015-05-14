@@ -3,14 +3,11 @@ using System.Text;
 
 namespace Algorithm {
     public class VarSizeArray<T> {
-        const int INIT_LENG = 4;
+        const int InitLeng = 4;
         
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="leng">initial array length</param>
-        public VarSizeArray(int leng = INIT_LENG) {
-            if (leng <= 0) { throw new ArgumentException("The leng is out of range."); }
+        public VarSizeArray(int leng = InitLeng) {
+            if (leng <= 0) throw new ArgumentException("The leng is out of range.");
+
             ary = new T[leng];
             Count = Capacity = leng;
         }
@@ -21,17 +18,17 @@ namespace Algorithm {
 
         public T this[int i] {
             set {
-                if (i < 0 || Count <= i) { throw new ArgumentOutOfRangeException("i"); }
+                if (i < 0 || Count <= i) throw new ArgumentOutOfRangeException("i");
                 ary[i] = value;
             }
             get {
-                if (i < 0 || Count <= i) { throw new ArgumentOutOfRangeException("i"); }
+                if (i < 0 || Count <= i) throw new ArgumentOutOfRangeException("i");
                 return ary[i];
             }
         }
 
         public void AddLast(T v) {
-            if (Capacity <= Count) { reAlloc(); }
+            if (Capacity <= Count) reAlloc();
             ary[Count++] = v;
         }
 

@@ -1,25 +1,23 @@
-﻿using System;
-
-namespace Algorithm {
+﻿namespace Algorithm {
     public class Queue<T> {
-        private SinglyLinkedList<T> sll = new SinglyLinkedList<T>();
+        private SinglyLinkedList<T> list = new SinglyLinkedList<T>();
 
         public void Enqueue(T val) {
-            sll.AddLast(val);
+            list.AddLast(val);
         }
 
         public T Dequeue() {
-            return sll.Remove(0);
+            return list.Remove(0);
         }
 
         public T Peek() {
-            return sll.Peek(0);
+            return list.Peek(0);
         }
 
         public override string ToString() {
-            return sll.ToString();
+            return list.ToString();
         }
 
-        public int Leng { get { return sll.Leng; } }
+        public int Leng { get { return list.Leng; } }
     }
 }
