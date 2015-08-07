@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySearchTest.cs" />
-    <Compile Include="BinaryTreeTest.cs" />
+    <Compile Include="BinarySearchTreeTest.cs" />
     <Compile Include="HeapSortTest.cs" />
     <Compile Include="MergeSortTest.cs" />
     <Compile Include="QueueTest.cs" />

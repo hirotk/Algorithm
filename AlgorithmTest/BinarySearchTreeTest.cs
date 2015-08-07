@@ -4,7 +4,7 @@ using Algorithm;
 
 namespace AlgorithmTest {
     [TestClass]
-    public class BinaryTreeTest {
+    public class BinarySearchTreeTest {
         static BinaryTree<String> target;
 
         [TestInitialize]
