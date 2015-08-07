@@ -45,7 +45,7 @@
     <Compile Include="SimpleSort.cs" />
     <Compile Include="SinglyLinkedList.cs" />
     <Compile Include="Stack.cs" />
-    <Compile Include="VerSizeArray.cs" />
+    <Compile Include="VarSizeArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
