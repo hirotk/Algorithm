@@ -65,6 +65,7 @@
     <Compile Include="SimpleSortTest.cs" />
     <Compile Include="SinglyLinkedListTest.cs" />
     <Compile Include="StackTest.cs" />
+    <Compile Include="DoublyLinkedListTest.cs" />
     <Compile Include="VarSizeArrayTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

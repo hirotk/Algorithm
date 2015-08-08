@@ -1,6 +1,6 @@
 ﻿namespace Algorithm {
     public class Queue<T> {
-        private SinglyLinkedList<T> list = new SinglyLinkedList<T>();
+        private DoublyLinkedList<T> list = new DoublyLinkedList<T>();
 
         public void Enqueue(T val) {
             list.AddLast(val);

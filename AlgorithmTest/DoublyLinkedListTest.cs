@@ -4,8 +4,8 @@ using Algorithm;
 
 namespace AlgorithmTest {
     [TestClass]
-    public class SinglyLinkedListTest {
-        static SinglyLinkedList<int> target;
+    public class DoublyLinkedListTest {
+        static DoublyLinkedList<int> target;
 
         [ClassInitialize]
         public static void InitializeTarget(TestContext testContext) { }
@@ -15,7 +15,7 @@ namespace AlgorithmTest {
 
         [TestInitialize]
         public void BeginTestMethod() {
-            target = new SinglyLinkedList<int>();
+            target = new DoublyLinkedList<int>();
             Assert.AreEqual(target.Leng, 0);
             target.Add(2);
             target.Add(3, 1);
@@ -56,7 +56,7 @@ namespace AlgorithmTest {
             string actual = target.ToString();
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(target.Leng, 2);
-            
+
             target.Remove(1);
             target.Remove();
             expected = "[ ]";
