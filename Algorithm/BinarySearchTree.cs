@@ -10,6 +10,10 @@ namespace Algorithm {
         None, Left, Right, Both
     }
 
+    public enum Order {
+        Pre, In, Post
+    }
+
     public class BinNode<T> {
         public int Key { get; private set; }
         public T Val { get; private set; }
@@ -48,6 +52,12 @@ namespace Algorithm {
             node.NodeTyp = NodeType.LeftChild;
         }
 
+        public BinNode<T> RemoveLeftChild() {
+            var left = this.Left;
+            this.Left = null;
+            return left;
+        }
+
         public void AddRightChild(BinNode<T> node) {
             this.Right = node;
             if (node == null) return;
@@ -56,44 +66,10 @@ namespace Algorithm {
             node.NodeTyp = NodeType.RightChild;
         }
 
-        private BinNode<T> removeMinNode(BinNode<T> node) {
-            Debug.Assert(node != null);
-            while (node.Left != null) {
-                node = node.Left;
-            }
-
-            Debug.Assert(node.NodeTyp == NodeType.LeftChild);
-            node.Parent.AddLeftChild(node.Right);
-
-            return node; // removed node
-        }
-
-        public BinNode<T> RemoveThis() {
-            BinNode<T> node = null;
-
-            switch (ChildTyp) {
-                case ChildType.None:
-                    break;
-                case ChildType.Left:  // Only
-                    node = Left;
-                    break;
-                case ChildType.Right: // Only
-                    node = Right;
-                    break;
-                case ChildType.Both:
-                    node = removeMinNode(Right);
-                    node.AddLeftChild(Left);
-                    node.AddRightChild(Right);
-                    break;
-            }
-
-            if (NodeTyp == NodeType.LeftChild) {
-                Parent.AddLeftChild(node);
-            } else if (NodeTyp == NodeType.RightChild) {
-                Parent.AddRightChild(node);
-            }
-           
-            return node;
+        public BinNode<T> RemoveRightChild() {
+            var right = this.Right;
+            this.Right = null;
+            return right;
         }
     }
 
@@ -105,7 +81,7 @@ namespace Algorithm {
             sentinel.NodeTyp = NodeType.Sent;
         }
 
-        public void Add(int key, T val) {
+        public void Add(int key, T val=default(T)) {
             var newNode = new BinNode<T>(key, val);
             if (Root == null) {
                 sentinel.AddLeftChild(newNode);
@@ -147,27 +123,98 @@ namespace Algorithm {
             return null;
         }
 
+        private BinNode<T> getLeftestNode(BinNode<T> node) {
+            if (node == null) return null;
+            else if (node.Left == null) return node;
+            else return getLeftestNode(node.Left);
+        }
+
         public BinNode<T> Remove(int key) {
             var node = Search(key);
+            if (node == null) return node;
 
-            if (node != null) {
-                node = node.RemoveThis();
+            var ctyp = node.ChildTyp;
+            var ntyp = node.NodeTyp;
+            if (ctyp == ChildType.None) {
+                if (ntyp == NodeType.LeftChild) {
+                    node.Parent.RemoveLeftChild();
+                } else {
+                    node.Parent.RemoveRightChild();
+                }
+            } else if (ctyp == ChildType.Both) {
+                var move = getLeftestNode(node.Right);
+                Debug.Assert(move.Left == null);
+                if (move == node.Right) {
+                    move.AddLeftChild(node.Left);
+                } else {
+                    // Cut the leftest node
+                    move.Parent.AddLeftChild(move.Right);
+                    // Put the move node
+                    move.AddLeftChild(node.Left);
+                    move.AddRightChild(node.Right);
+                }
+
+                // Set the parent to the move node
+                if (ntyp == NodeType.LeftChild) {
+                    node.Parent.AddLeftChild(move);
+                } else {
+                    node.Parent.AddRightChild(move);
+                }
+            } else if (ctyp == ChildType.Left) {
+                if (ntyp == NodeType.LeftChild) {
+                    node.Parent.AddLeftChild(node.Left);
+                } else {
+                    node.Parent.AddRightChild(node.Left);
+                }
+            } else {
+                Debug.Assert(ctyp == ChildType.Right);
+                if (ntyp == NodeType.LeftChild) {
+                    node.Parent.AddLeftChild(node.Right);
+                } else {
+                    node.Parent.AddRightChild(node.Right);
+                }
             }
 
             return node;
         }
 
-        private void depthFirst(BinNode<T> node, Queue<BinNode<T>> que) {
+        private void dfsPost(BinNode<T> node) {
             if (node == null) return;
-
-            depthFirst(node.Left, que);
-            que.Enqueue(node);
-            depthFirst(node.Right, que);
+            dfsPost(node.Left);
+            dfsPost(node.Right);
+            Remove(node.Key);
         }
 
-        private string getKeyValString(bool isKey = false) {
+        public void Clear() {
+            dfsPost(Root);
+        }
+
+        private void dfsInOrder(BinNode<T> node, Queue<BinNode<T>> que) {
+            if (node == null) return;
+            dfsInOrder(node.Left, que);
+            que.Enqueue(node);
+            dfsInOrder(node.Right, que);
+        }
+
+        private void dfsPreOrder(BinNode<T> node, Queue<BinNode<T>> que) {
+            if (node == null) return;
+            que.Enqueue(node);
+            dfsPreOrder(node.Left, que);
+            dfsPreOrder(node.Right, que);
+        }
+
+        private void dfsPostOrder(BinNode<T> node, Queue<BinNode<T>> que) {
+            if (node == null) return;
+            dfsPostOrder(node.Left, que);
+            dfsPostOrder(node.Right, que);
+            que.Enqueue(node);
+        }
+
+        private string getKeyValString(bool isKey = false, Order order = Order.In) {
             var que = new Queue<BinNode<T>>();
-            depthFirst(Root, que);
+            if (order == Order.Pre) dfsPreOrder(Root, que);
+            else if (order == Order.Post) dfsPostOrder(Root, que);
+            else dfsInOrder(Root, que);
 
             var result = new StringBuilder("[ ");
             while (que.Leng > 0) {
@@ -185,12 +232,12 @@ namespace Algorithm {
             return result.ToString();
         }
 
-        public string KeysToString() {
-            return getKeyValString(isKey:true);
+        public string KeysToString(Order order = Order.In) {
+            return getKeyValString(isKey:true, order:order);
         }
 
-        public string ValsToString() {
-            return getKeyValString(isKey:false);
+        public string ValsToString(Order order = Order.In) {
+            return getKeyValString(isKey:false, order:order);
         }
 
         public override string ToString() {
